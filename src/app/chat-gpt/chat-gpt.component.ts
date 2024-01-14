@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-chat-gpt',
@@ -8,5 +9,8 @@ import { Component } from '@angular/core';
   styleUrl: './chat-gpt.component.css'
 })
 export class ChatGPTComponent {
+
+  showSpinner = false;
+  chatConversation: [] = [];
 
 }
