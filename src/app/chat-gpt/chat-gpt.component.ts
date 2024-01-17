@@ -13,7 +13,7 @@ import { ChatWithBot } from '../models/gpt-response';
 })
 export class ChatGPTComponent {
 
-  promptText = '¿Por qué llueve caramelos?';
+  promptText = '';
   chatConversation: ChatWithBot[] = [];
   showSpinner = false;
 
