@@ -1,34 +1,36 @@
 <div class="container">
-
   <div class="row">
     <div class="d-flex justify-content-end">
-      <input class="form-control me-2" type="text" [(ngModel)]="promptText" placeholder="porque la nubes vuelan"
+      <input class="form-control me-2" type="text" [(ngModel)]="promptText" placeholder="Escribe tu pregunta aquí"
         aria-label="Search">
       <button class="btn btn-outline-secondary" (click)="checkResponse()" type="submit">Pulsar</button>
     </div>
+
     <div class="col-md-12">
       <br>
       <div class="card">
-        <h4 class="card-header center neon_1">Chiki Chiki Chat ¡¡</h4>
+        <h4 class="card-header center neon_1">Chiki Chiki Chat</h4>
         <div class="card-body">
           <h6 class="card-title text-success center"></h6>
-          <div class="row">
-            <div class="col-md-12"></div>
+
+          <!-- Spinner que se muestra mientras se carga la respuesta -->
+          <div *ngIf="showSpinner" class="spinner-container">
+            <img src="../../assets/ZNeT.gif" alt="Cargando..." width="50px" height="50px">
+          </div>
+
+          <!-- Contenido del chat, visible solo cuando no se muestra el spinner -->
+          <div *ngIf="!showSpinner" class="row">
             <div class="col-md-12">
               <div class="frame-box">
-                <div><img src="../../assets/ZNeT.gif" width="50px" height="50px">
-                  <div *ngFor="let item of chatConversation">
-                    <p class="card-text padding" [ngClass]="item.cssClass">
-                      <b>{{item.person}}:</b> {{getText(item.response)}}
-                    </p>
-                  </div>
-
+                <div *ngFor="let item of chatConversation">
+                  <p class="card-text padding" [ngClass]="item.cssClass">
+                    <b>{{item.person}}:</b> {{getText(item.response)}}
+                  </p>
                 </div>
               </div>
-              <br>
-
             </div>
           </div>
+
         </div>
       </div>
     </div>

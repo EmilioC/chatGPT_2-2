@@ -1,16 +1,15 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ChatgptService } from '../services/chatgpt.service';
+import { ChatgptService } from '../services/chatpgt.service';
 import { FormsModule } from '@angular/forms';
 import { ChatWithBot } from '../models/gpt-response';
-
 
 @Component({
   selector: 'app-chat-gpt',
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './chat-gpt.component.html',
-  styleUrl: './chat-gpt.component.css'
+  styleUrls: ['./chat-gpt.component.css']
 })
 export class ChatGPTComponent {
 
@@ -22,20 +21,22 @@ export class ChatGPTComponent {
 
   async checkResponse() {
     try {
-      this.showSpinner = true
+      this.showSpinner = true;
+
+      // Añadir pregunta del usuario al chat antes de obtener la respuesta
+      this.chatgptSvc.addUserQuestionToChat(this.promptText);
+
       const response = await this.chatgptSvc.getResponse(this.promptText);
       if (response) {
-        const chat = this.chatgptSvc.pushChatContent(response, 'BOT', 'USER');
-        console.log("CHAT", chat);
-        this.chatConversation = chat;
-        this.showSpinner = false// Cambia 'Fistro pecador' y 'person' según sea necesario
+        // No es necesario llamar a pushChatContent aquí, ya que se llama dentro de getResponse
+        console.log("CHAT", this.chatConversation);
+        this.chatConversation = this.chatgptSvc.chatConversation;
+        this.showSpinner = false;
       }
-      // this.promptText = '';
     } catch (error) {
       console.error('Error al obtener la respuesta del servicio:', error);
     }
   }
-
 
   getText(data: string) {
     // Verifica si 'data' está definido y no es null antes de llamar a 'split'
