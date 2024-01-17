@@ -29,9 +29,10 @@ export class ChatGPTComponent {
       const response = await this.chatgptSvc.getResponse(this.promptText);
       if (response) {
         // No es necesario llamar a pushChatContent aquí, ya que se llama dentro de getResponse
-        console.log("CHAT", this.chatConversation);
+
         this.chatConversation = this.chatgptSvc.chatConversation;
         this.showSpinner = false;
+        this.promptText = "";
       }
     } catch (error) {
       console.error('Error al obtener la respuesta del servicio:', error);
