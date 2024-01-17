@@ -17,9 +17,9 @@
             <div class="col-md-12">
               <div class="frame-box">
                 <div><img src="../../assets/ZNeT.gif" width="50px" height="50px">
-                  <div>
-                    <p class="card-text padding">
-                      <b></b>
+                  <div *ngFor="let item of chatConversation">
+                    <p class="card-text padding" [ngClass]="item.cssClass">
+                      <b>{{item.person}}:</b> {{getText(item.response)}}
                     </p>
                   </div>
 
